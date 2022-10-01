@@ -3,8 +3,18 @@
 <head>
   <meta charset="utf-8">
   <title>CHATTING</title>
-  <?php
+</head>
 
+<body>
+s
+  <div>
+    <form method="POST" id="input">
+      <input type="text" , name="name" , placeholder="닉네임"> <br>
+      <input type="text" , name="chats" , placeholder="내용">
+      <input id="sub" type="submit" , value="입력">
+    </form>
+  </div>
+  <?php
   $id = $_POST['name'];
   $chat = $_POST['chats'];
 
@@ -30,35 +40,15 @@
 
   $row = mysqli_fetch_array($output);
 
-  ?>
-</head>
-
-<body>
-
-  <div>
-    <form method="POST" , action="/main.php" id="sub_form">
-      <input type="text" , id="name" , placeholder="닉네임"> <br>
-      <input type="text" , id="chats" , placeholder="내용">
-      <input id="sub" type="submit" , value="입력">
-    </form>
-  </div>
-
-  <?php
   while ($row = mysqli_fetch_array($output)) {
 
     echo $row[1] . ':' . $row[2] . '<br />';
   }
+
+  mysqli_close($conn);
   ?>
-  <script>
-    $("#sub").click(function() {
-      if ($.trim($("#name").val()) == '' && $.trim($("#chats").val())) {
-        alert("입력해주세요.");
-        s
-        return false;
-      }
-      $("#sub_form").submit();
-    });
-  </script>
+
+
 </body>
 
 </html>
