@@ -6,19 +6,16 @@
 </head>
 
 <body>
-s
   <div>
     <form method="POST" id="input">
-      <input type="text" , name="name" , placeholder="닉네임"> <br>
-      <input type="text" , name="chats" , placeholder="내용">
+    <input type="text" , name="chats" , placeholder="내용">
       <input id="sub" type="submit" , value="입력">
     </form>
   </div>
   <?php
-  $id = $_POST['name'];
   $chat = $_POST['chats'];
 
-  $conn = mysqli_connect("localhost", "root", "12341234", "chat");
+  $conn = mysqli_connect("localhost", "root", "wkdguswhd0626!!", "chat");
 
 
   if ($conn->connect_error) {
@@ -26,11 +23,11 @@ s
   }
 
 
-  $sql = "SELECT name, description FROM chatrecord";
+  $sql = "SELECT description FROM chatrecord";
 
 
 
-  $input_code = "INSERT INTO chatrecord (name, description) VALUES ('$id', '$chat')"; // HTML로부터 받은 값 입력
+  $input_code = "INSERT INTO chatrecord (description) VALUES ('$chat')"; // HTML로부터 받은 값 입력
 
   $output_code = "SELECT * FROM chatrecord"; // DB 내용 전체 선택
 

@@ -1,12 +1,11 @@
 <?php
-echo $_POST['id'];
-echo $_POST['password'];
 $id =$_POST['id'];
+$name=$_post['name'];
 $password = $_POST['password'];
-$conn=mysqli_connect('127.0.0.1','root','111111','chat');
+$conn=mysqli_connect('localhost','root','wkdguswhd0626!!','chat');
 $sql=$sql = "
-  INSERT INTO users (name,password)
-    VALUES('{$_POST['id']}','{$_POST['password']}')
+  INSERT INTO users (id,name,password)
+    VALUES('{$_POST['id']}','{$_POST['name']},'{$_POST['password']}')
 ";
 
 mysqli_query($conn,$sql);

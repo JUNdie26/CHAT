@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title>Login</title>
@@ -16,8 +16,6 @@
              <h6>로그인에 실패하였습니다</h6>
              <?php
            }
-        }else{
-          echo $_GET['ch'];
         }
          ?>
         <input type='submit'value='로그인'>
