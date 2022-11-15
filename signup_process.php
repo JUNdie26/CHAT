@@ -10,6 +10,6 @@ $sql=$sql = "
 
 mysqli_query($conn,$sql);
 ?>
-        <meta http-equiv="refresh" content="0;URL='login.php?ch'"> //login.php로 이동시키는 코드
+        <meta http-equiv="refresh" content="0;URL='login.php?ch'"> 
 <?php
  ?>

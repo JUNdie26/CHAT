@@ -13,7 +13,7 @@
     </form>
   </div>
   <?php
-  $chat = $_POST['chats'];
+  $chat = $_POST['chats~'];
 
   $conn = mysqli_connect("localhost", "root", "wkdguswhd0626!!", "chat");
 
