@@ -14,12 +14,13 @@
   </div>
 
   <?php
-  $name2 = "my_variable2";
-  $name_CK = $_COOKIE[$name2];
-
+  
   $chat = $_POST['chats'];
   echo $name_CK;
   $conn = mysqli_connect("localhost", "root", "wkdguswhd0626!!", "chat");
+  $UsId = $_SESSION["id"];
+  $UsName = $_SESSION["name"];
+
 
   if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -29,7 +30,7 @@
   $sql = "SELECT description FROM chatrecord";
 
 
-  $input_code = "INSERT INTO chatrecord (name, description) VALUES ('$name_CK', '$chat')";
+  $input_code = "INSERT INTO chatrecord (id, name, description) VALUES " + $UsId  + $UsName + $chat;
 
   $output_code = "SELECT * FROM chatrecord";
 
