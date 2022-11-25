@@ -9,7 +9,6 @@ $sql="
   INSERT INTO users (id,name,password)
     VALUES('{$_POST['id']}','{$_POST['name']}','{$_POST['password']}')
 ";
-echo $sql;
 mysqli_query($conn,$sql);
 
 ?>
