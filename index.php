@@ -9,6 +9,16 @@ ini_set('display_errors', '0');
 </head>
 
 <body>
+  <script>
+    function NotReload() {
+      if ((event.ctrlKey == true && (event.keyCode == 78 || event.keyCode == 82)) || (event.keyCode == 116)) {
+        event.keyCode = 0;
+        event.cancelBubble = true;
+        event.returnValue = false;
+      }
+    }
+    document.onkeydown = NotReload;
+  </script>
   <?php
   $id = $_POST['id'];
   $name = $_POST['name'];
@@ -17,7 +27,7 @@ ini_set('display_errors', '0');
     <h1>
       <b>
         <?php
-        echo "[" . $name . "]으로 접속 됨"
+        echo "[" . $name . "](으)로 접속 됨"
         ?>
       </b>
     </h1>
@@ -47,15 +57,16 @@ ini_set('display_errors', '0');
 
       $chat = $_POST['chats'];
 
+      $name = $_POST['name'];
+
       $sql = "SELECT description FROM chatrecord";
 
       $input_code = "
   INSERT INTO chatrecord (id,name,description)
     VALUES('{$_POST['id']}','{$_POST['name']}','{$_POST['chats']}')
   ";
-      if ($chat != NULL && $overLap != $chat) {
-        $input = mysqli_query($conn, $input_code);
-      }
+
+
 
       $output_code = "SELECT * FROM chatrecord ";
 
@@ -64,9 +75,18 @@ ini_set('display_errors', '0');
 
       $row = mysqli_fetch_array($output);
 
+      if ($chat != NULL && $overLap != $chat) {
+        $input = mysqli_query($conn, $input_code);
+      }
+
       while ($row = mysqli_fetch_array($output)) {
+
         echo $row["name"] . ':' . $row["description"] . '<br />';
+
         $overLap = $row["description"];
+      }
+      if ($chat != NULL && $chat != $overLap) {
+        echo $name . ':' . $chat . '<br />';
       }
 
 
