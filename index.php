@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+ini_set('display_errors', '0');
+?>
 
 <head>
   <meta charset="utf-8">
@@ -6,50 +9,72 @@
 </head>
 
 <body>
+  <?php
+  $id = $_POST['id'];
+  $name = $_POST['name'];
+  ?>
+  <div>
+    <h1>
+      <b>
+        <?php
+        echo "[" . $name . "]으로 접속 됨"
+        ?>
+      </b>
+    </h1>
+  </div>
+
+  <div>
+    <h5>
+      ※전 내용과 중복될 시 도배로 간주하여 메시지 전송이 불가합니다※
+    </h5>
+  </div>
+
   <div>
     <form method="POST" id="input">
       <input type="text" , name="chats" , placeholder="내용">
+      <input type='hidden' name='id' value="<?php echo $_POST['id']; ?>">
+      <input type='hidden' name='name' value="<?php echo $_POST['name']; ?>">
       <input id="sub" type="submit" , value="입력">
+      <a href="login.php?ch=">로그아웃</a>
     </form>
   </div>
 
-  <?php
-  
-  $chat = $_POST['chats'];
-  echo $name_CK;
-  $conn = mysqli_connect("localhost", "root", "wkdguswhd0626!!", "chat");
-  $UsId = $_SESSION["id"];
-  $UsName = $_SESSION["name"];
+  <div>
+    <h4>
+      <?php
+
+      $conn = mysqli_connect('localhost', 'root', 'wkdguswhd0626!!', 'chat');
+
+      $chat = $_POST['chats'];
+
+      $sql = "SELECT description FROM chatrecord";
+
+      $input_code = "
+  INSERT INTO chatrecord (id,name,description)
+    VALUES('{$_POST['id']}','{$_POST['name']}','{$_POST['chats']}')
+  ";
+      if ($chat != NULL && $overLap != $chat) {
+        $input = mysqli_query($conn, $input_code);
+      }
+
+      $output_code = "SELECT * FROM chatrecord ";
+
+      $output = mysqli_query($conn, $output_code);
 
 
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-  }
+      $row = mysqli_fetch_array($output);
+
+      while ($row = mysqli_fetch_array($output)) {
+        echo $row["name"] . ':' . $row["description"] . '<br />';
+        $overLap = $row["description"];
+      }
 
 
-  $sql = "SELECT description FROM chatrecord";
 
-
-  $input_code = "INSERT INTO chatrecord (id, name, description) VALUES " + $UsId  + $UsName + $chat;
-
-  $output_code = "SELECT * FROM chatrecord";
-
-
-  $input = mysqli_query($conn, $input_code);
-
-  $output = mysqli_query($conn, $output_code);
-
-
-  $row = mysqli_fetch_array($output);
-
-  while ($row = mysqli_fetch_array($output)) {
-
-    echo $row[1] . ':' . $row[2] . '<br />';
-  }
-
-  mysqli_close($conn);
-  ?>
-
+      mysqli_close($conn);
+      ?>
+    </h4>
+  </div>
 
 </body>
 
